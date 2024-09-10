@@ -274,7 +274,7 @@ main .form form .item-remove {
 
 main .form form .item-add {
     overflow: unset;
-    display: flex;
+    display: none;
     justify-content: center;
 }
 
