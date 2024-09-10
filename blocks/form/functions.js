@@ -1,7 +1,7 @@
 
 function submitSuccess(e, form) {
   const { payload } = e;
-  if (payload?.body?.redirectUrl) {
+  if (payload && payload.body && payload.body.redirectUrl) {
     window.location.assign(encodeURI(payload.body.redirectUrl));
   } else {
     let thankYouMessage = form.querySelector('.form-message.success-message');
@@ -9,7 +9,7 @@ function submitSuccess(e, form) {
       thankYouMessage = document.createElement('div');
       thankYouMessage.className = 'form-message success-message';
     }
-    thankYouMessage.innerHTML = payload?.body?.thankYouMessage || 'Thanks for your submission';
+    thankYouMessage.innerHTML = (payload && payload.body) ? payload.body.thankYouMessage : 'Thanks for your submission';
     form.prepend(thankYouMessage);
     if (thankYouMessage.scrollIntoView) {
       thankYouMessage.scrollIntoView({ behavior: 'smooth' });
