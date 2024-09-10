@@ -66,7 +66,7 @@ function submitFailure(e, form) {
  * Submit form in excel
  * @name submitToSpreadSheet Submit data to Spreadsheet
  * @param {string} url in spreadsheet
- * @param {scope} globals - The global object containing necessary globals form data.
+ * @param {scope=} globals - The global object containing necessary globals form data.
  */
 function submitToSpreadSheet(url, glb) {
   const form = document.querySelector('form');
