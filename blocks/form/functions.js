@@ -44,7 +44,7 @@ function submitFailure(e, form) {
  * @name submitToSpreadSheet Submit data to Spreadsheet
  * @param {string} url in spreadsheet
  */
-function submitToSpreadSheet(url, ...args) {
+function submitToSpreadSheet(url, args) {
   const form = document.querySelector('form');
   const valid = form.checkValidity();
   if (valid) {
