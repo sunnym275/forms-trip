@@ -23,7 +23,7 @@ function submitSuccess(e, form) {
   }
 }
 
-export function submitFailure(e, form) {
+function submitFailure(e, form) {
   let errorMessage = form.querySelector('.form-message.error-message');
   if (!errorMessage) {
     errorMessage = document.createElement('div');
