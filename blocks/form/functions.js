@@ -68,11 +68,11 @@ function submitFailure(e, form) {
  * @param {string} url in spreadsheet
  * @param {scope=} globals - The global object containing necessary globals form data.
  */
-function submitToSpreadSheet(url, glb) {
+function submitToSpreadSheet(url, args) {
   const form = document.querySelector('form');
   const valid = form.checkValidity();
   if (valid) {
-    const globals = glb[0];
+    const globals = args[0];
     const data = flattenObject(globals.functions.exportData());
     const response = fetch(url, {
       method: 'POST',
