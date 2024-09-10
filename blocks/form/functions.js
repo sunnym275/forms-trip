@@ -1,4 +1,27 @@
 
+function flattenObject(obj, parentKey = '', result = {}) {
+    for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            const newKey = parentKey ? `${parentKey}.${key}` : key;
+            if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+                flattenObject(obj[key], newKey, result);
+            } else if (Array.isArray(obj[key])) {
+                if (obj[key].every(item => typeof item === 'object' && !Array.isArray(item))) {
+                    const concatenatedValues = obj[key].map(item => Object.values(item).join(',')).join(',');
+                    result[newKey] = concatenatedValues;
+                } else {
+                    obj[key].forEach((item, index) => {
+                        flattenObject(item, `${newKey}[${index}]`, result);
+                    });
+                }
+            } else {
+                result[newKey] = obj[key];
+            }
+        }
+    }
+    return result;
+}
+
 function submitSuccess(e, form) {
   const { payload } = e;
   if (payload && payload.body && payload.body.redirectUrl) {
@@ -49,7 +72,7 @@ function submitToSpreadSheet(url, args) {
   const valid = form.checkValidity();
   if (valid) {
     const globals = args[0];
-    const data = globals.functions.exportData();
+    const data = flattenObject(globals.functions.exportData());
     const response = fetch(url, {
       method: 'POST',
       body: JSON.stringify({ data }),
