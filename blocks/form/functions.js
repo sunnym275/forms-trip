@@ -74,7 +74,7 @@ function submitToSpreadSheet(url, args) {
   if (valid) {
     // const globals = args[0];
     const data = flattenObject(myForm.exportData());
-    const response = fetch(url, {
+    const response = await fetch(url, {
       method: 'POST',
       body: JSON.stringify({ data }),
       headers: {
