@@ -9,23 +9,18 @@ function submitToSpreadSheet(url, ...args) {
   if (valid) {
     const [globals] = args;
     const data = globals.functions.exportData();
-    fetch(url, {
+    const response = await fetch(url, {
       method: 'POST',
       body: JSON.stringify({ data }),
       headers: {
         'Content-Type': 'application/json',
       },
     })
-      .then((response) => {
-        if (!response.ok) {
-          submitFailure({}, form);
-        } else {
-          submitSuccess({}, form);
-        }
-      })
-      .catch(() => {
-        submitFailure({}, form);
-      });
+    if (!response.ok) {
+      submitFailure({}, form);
+    } else {
+      submitSuccess({}, form);
+    }
   }
 }
 
